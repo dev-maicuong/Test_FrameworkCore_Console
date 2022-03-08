@@ -18,14 +18,7 @@ namespace Test_FrameworkCore_Console.EF
         public DbSet<UserDetail> UserDetails { set; get; }
         public DbSet<UserRole> UserRoles { set; get; }
         public DbSet<Product> Products { set; get; }
-        // Tạo ILoggerFactory 
-        public static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder => {
-            builder
-                   .AddFilter(DbLoggerCategory.Database.Command.Name, LogLevel.Warning)
-                   .AddFilter(DbLoggerCategory.Query.Name, LogLevel.Debug)
-                   .AddConsole();
-        }
-        );
+        
         private const string connectionString = @"
                 Server=DEV404\SQLEXPRESS;Database=TestQueryEFData;Trusted_Connection=True;";
 
@@ -34,9 +27,11 @@ namespace Test_FrameworkCore_Console.EF
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder
-                .UseLoggerFactory(loggerFactory)
-                .UseSqlServer(connectionString);
+            // Tạo ILoggerFactory
+            ILoggerFactory loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+
+            optionsBuilder.UseSqlServer(connectionString)            // thiết lập làm việc với SqlServer
+                          .UseLoggerFactory(loggerFactory);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
