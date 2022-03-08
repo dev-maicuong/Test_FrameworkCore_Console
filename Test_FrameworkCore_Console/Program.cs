@@ -3,6 +3,7 @@ using Test_FrameworkCore_Console.EF;
 using System.Linq;
 using System.Collections.Generic;
 using Test_FrameworkCore_Console.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Test_FrameworkCore_Console
 {
@@ -21,11 +22,10 @@ namespace Test_FrameworkCore_Console
         {
             using var db = new NameDbContext();
 
-            List<Product> products = db.Products.ToList();
-            foreach(var item in products)
-            {
-                item.productName = "San pham update..";
-            }
+            //db.Entry(Product).State = EntityState.Modified;
+
+            Product product = new Product { productId = 2, productName = "San phẩm 12" };
+            db.Products.Update(product);
             var resultNumber = db.SaveChanges();
 
             Console.WriteLine($"result number : {resultNumber}");
