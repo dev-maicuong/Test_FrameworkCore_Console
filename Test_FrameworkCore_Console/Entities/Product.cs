@@ -14,5 +14,6 @@ namespace Test_FrameworkCore_Console.Entities
         [ForeignKey("userId")]
         public User user { set; get; }
         public long? userId { set; get; }
+        public DateTime? DayCreate { set; get; }
     }
 }

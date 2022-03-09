@@ -13,6 +13,8 @@ namespace Test_FrameworkCore_Console.Entities
         public string pass { set; get; }
         public string firstName { set; get; }
         public string lastName { set; get; }
+        public DateTime? DayCreate { set; get; }
+        public DateTime? DayUpdate { set; get; }
         //reference
         public UserDetail userDetail { set; get; }
         public List<UserRole> userRoles { set; get; }

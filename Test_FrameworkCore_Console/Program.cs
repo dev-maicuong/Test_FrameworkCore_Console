@@ -21,14 +21,18 @@ namespace Test_FrameworkCore_Console
         static void Main(string[] args)
         {
             using var db = new NameDbContext();
+            DateTime dateTime = DateTime.Now;
+            Console.WriteLine(dateTime);
+            Console.WriteLine(dateTime.AddMonths(-1));
+            Console.WriteLine(dateTime.AddMonths(-2).AddDays(-2));
 
-            //db.Entry(Product).State = EntityState.Modified;
+            //List<Product> products = db.Products.Where(p => p.DayCreate.Value.Date < dateTime).ToList();
 
-            Product product = new Product { productId = 2, productName = "San phẩm 12" };
-            db.Products.Update(product);
-            var resultNumber = db.SaveChanges();
+            //products.ForEach(x =>
+            //{
+            //    Console.WriteLine($"Name: {x.productName} - Day: {x.DayCreate}");
 
-            Console.WriteLine($"result number : {resultNumber}");
+            //});
             Console.ReadLine();
 
         }

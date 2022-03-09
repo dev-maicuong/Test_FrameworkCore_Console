@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Test_FrameworkCore_Console.EF;
 
 namespace Test_FrameworkCore_Console.Migrations
 {
     [DbContext(typeof(NameDbContext))]
-    partial class NameDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220309135651_v0.2")]
+    partial class v02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,7 +28,7 @@ namespace Test_FrameworkCore_Console.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DayCreate")
+                    b.Property<DateTime>("DayCreate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("productName")
@@ -45,12 +47,14 @@ namespace Test_FrameworkCore_Console.Migrations
                         new
                         {
                             productId = 1L,
+                            DayCreate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             productName = "Sản phẩm 1",
                             userId = 1L
                         },
                         new
                         {
                             productId = 2L,
+                            DayCreate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             productName = "Sản phẩm 2",
                             userId = 1L
                         });
