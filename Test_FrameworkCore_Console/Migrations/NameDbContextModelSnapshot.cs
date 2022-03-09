@@ -53,14 +53,26 @@ namespace Test_FrameworkCore_Console.Migrations
                             productId = 2L,
                             productName = "Sản phẩm 2",
                             userId = 1L
+                        },
+                        new
+                        {
+                            productId = 3L,
+                            productName = "Sản phẩm 3",
+                            userId = 1L
+                        },
+                        new
+                        {
+                            productId = 4L,
+                            productName = "Sản phẩm 4",
+                            userId = 1L
                         });
                 });
 
             modelBuilder.Entity("Test_FrameworkCore_Console.Entities.Role", b =>
                 {
-                    b.Property<long>("roleId")
+                    b.Property<int>("roleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("description")
@@ -76,13 +88,13 @@ namespace Test_FrameworkCore_Console.Migrations
                     b.HasData(
                         new
                         {
-                            roleId = 1L,
+                            roleId = 1,
                             description = "Mô tả vai trò 1",
                             roleName = "Vai trò 1"
                         },
                         new
                         {
-                            roleId = 2L,
+                            roleId = 2,
                             description = "Mô tả vai trò 2",
                             roleName = "Vai trò 2"
                         });
@@ -94,6 +106,12 @@ namespace Test_FrameworkCore_Console.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("DayCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DayUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
@@ -116,6 +134,14 @@ namespace Test_FrameworkCore_Console.Migrations
                         {
                             userId = 1L,
                             email = "hoangmaicuong99@gmail.com",
+                            firstName = "Cuong",
+                            lastName = "Hoang",
+                            pass = "123"
+                        },
+                        new
+                        {
+                            userId = 2L,
+                            email = "cuonghm@vihatgroup.com",
                             firstName = "Cuong",
                             lastName = "Hoang",
                             pass = "123"
@@ -148,8 +174,8 @@ namespace Test_FrameworkCore_Console.Migrations
 
             modelBuilder.Entity("Test_FrameworkCore_Console.Entities.UserRole", b =>
                 {
-                    b.Property<long>("roleId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("roleId")
+                        .HasColumnType("int");
 
                     b.Property<long>("userId")
                         .HasColumnType("bigint");
@@ -163,7 +189,12 @@ namespace Test_FrameworkCore_Console.Migrations
                     b.HasData(
                         new
                         {
-                            roleId = 1L,
+                            roleId = 1,
+                            userId = 1L
+                        },
+                        new
+                        {
+                            roleId = 2,
                             userId = 1L
                         });
                 });

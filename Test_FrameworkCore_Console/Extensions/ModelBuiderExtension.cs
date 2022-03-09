@@ -17,12 +17,24 @@ namespace Test_FrameworkCore_Console.Extensions
                 {
                     productId = 1,
                     productName = "Sản phẩm 1",
-                    userId = 1
+                    userId = 1,
                 },
                 new Product
                 {
                     productId = 2,
                     productName = "Sản phẩm 2",
+                    userId = 1,
+                },
+                new Product
+                {
+                    productId = 3,
+                    productName = "Sản phẩm 3",
+                    userId = 1,
+                },
+                new Product
+                {
+                    productId = 4,
+                    productName = "Sản phẩm 4",
                     userId = 1,
                 });
             builder.Entity<Role>().HasData(
@@ -48,12 +60,25 @@ namespace Test_FrameworkCore_Console.Extensions
                     pass = "123",
                     firstName = "Cuong",
                     lastName = "Hoang",
+                },
+                new User
+                {
+                    userId = 2,
+                    email = "cuonghm@vihatgroup.com",
+                    pass = "123",
+                    firstName = "Cuong",
+                    lastName = "Hoang",
                 });
             builder.Entity<UserRole>().HasData(
                 new UserRole
                 {
                     userId = 1,
                     roleId = 1,
+                },
+                new UserRole
+                {
+                    userId = 1,
+                    roleId = 2,
                 });
             builder.Entity<UserDetail>().HasData(
                 new UserDetail

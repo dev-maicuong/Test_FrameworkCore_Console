@@ -8,7 +8,7 @@ namespace Test_FrameworkCore_Console.Entities
 {
     public class Role
     {
-        public long roleId { set; get; }
+        public int roleId { set; get; }
         public string roleName { set; get; }
         public string description { set; get; }
         //reference

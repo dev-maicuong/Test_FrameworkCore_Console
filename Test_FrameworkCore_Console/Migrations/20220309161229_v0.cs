@@ -11,7 +11,7 @@ namespace Test_FrameworkCore_Console.Migrations
                 name: "Role",
                 columns: table => new
                 {
-                    roleId = table.Column<long>(type: "bigint", nullable: false)
+                    roleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     roleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -30,7 +30,9 @@ namespace Test_FrameworkCore_Console.Migrations
                     email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     pass = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     firstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    lastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    lastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DayCreate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DayUpdate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,7 +46,8 @@ namespace Test_FrameworkCore_Console.Migrations
                     productId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     productName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    userId = table.Column<long>(type: "bigint", nullable: true)
+                    userId = table.Column<long>(type: "bigint", nullable: true),
+                    DayCreate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,7 +84,7 @@ namespace Test_FrameworkCore_Console.Migrations
                 columns: table => new
                 {
                     userId = table.Column<long>(type: "bigint", nullable: false),
-                    roleId = table.Column<long>(type: "bigint", nullable: false)
+                    roleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,6 +101,49 @@ namespace Test_FrameworkCore_Console.Migrations
                         principalTable: "User",
                         principalColumn: "userId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Role",
+                columns: new[] { "roleId", "description", "roleName" },
+                values: new object[,]
+                {
+                    { 1, "Mô tả vai trò 1", "Vai trò 1" },
+                    { 2, "Mô tả vai trò 2", "Vai trò 2" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "userId", "DayCreate", "DayUpdate", "email", "firstName", "lastName", "pass" },
+                values: new object[,]
+                {
+                    { 1L, null, null, "hoangmaicuong99@gmail.com", "Cuong", "Hoang", "123" },
+                    { 2L, null, null, "cuonghm@vihatgroup.com", "Cuong", "Hoang", "123" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "productId", "DayCreate", "productName", "userId" },
+                values: new object[,]
+                {
+                    { 1L, null, "Sản phẩm 1", 1L },
+                    { 2L, null, "Sản phẩm 2", 1L },
+                    { 3L, null, "Sản phẩm 3", 1L },
+                    { 4L, null, "Sản phẩm 4", 1L }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserDetail",
+                columns: new[] { "userDetailId", "createDay", "updateDay" },
+                values: new object[] { 1L, new DateTime(2022, 5, 8, 14, 40, 52, 531, DateTimeKind.Unspecified), new DateTime(2022, 5, 8, 14, 40, 52, 531, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "UserRole",
+                columns: new[] { "roleId", "userId" },
+                values: new object[,]
+                {
+                    { 1, 1L },
+                    { 2, 1L }
                 });
 
             migrationBuilder.CreateIndex(

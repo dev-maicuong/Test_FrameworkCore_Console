@@ -10,7 +10,7 @@ using Test_FrameworkCore_Console.EF;
 namespace Test_FrameworkCore_Console.Migrations
 {
     [DbContext(typeof(NameDbContext))]
-    [Migration("20220308150213_v0")]
+    [Migration("20220309161229_v0")]
     partial class v0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,6 +28,9 @@ namespace Test_FrameworkCore_Console.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("DayCreate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("productName")
                         .HasColumnType("nvarchar(max)");
 
@@ -39,13 +42,39 @@ namespace Test_FrameworkCore_Console.Migrations
                     b.HasIndex("userId");
 
                     b.ToTable("Product");
+
+                    b.HasData(
+                        new
+                        {
+                            productId = 1L,
+                            productName = "Sản phẩm 1",
+                            userId = 1L
+                        },
+                        new
+                        {
+                            productId = 2L,
+                            productName = "Sản phẩm 2",
+                            userId = 1L
+                        },
+                        new
+                        {
+                            productId = 3L,
+                            productName = "Sản phẩm 3",
+                            userId = 1L
+                        },
+                        new
+                        {
+                            productId = 4L,
+                            productName = "Sản phẩm 4",
+                            userId = 1L
+                        });
                 });
 
             modelBuilder.Entity("Test_FrameworkCore_Console.Entities.Role", b =>
                 {
-                    b.Property<long>("roleId")
+                    b.Property<int>("roleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("description")
@@ -57,6 +86,20 @@ namespace Test_FrameworkCore_Console.Migrations
                     b.HasKey("roleId");
 
                     b.ToTable("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            roleId = 1,
+                            description = "Mô tả vai trò 1",
+                            roleName = "Vai trò 1"
+                        },
+                        new
+                        {
+                            roleId = 2,
+                            description = "Mô tả vai trò 2",
+                            roleName = "Vai trò 2"
+                        });
                 });
 
             modelBuilder.Entity("Test_FrameworkCore_Console.Entities.User", b =>
@@ -65,6 +108,12 @@ namespace Test_FrameworkCore_Console.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("DayCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DayUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
@@ -81,6 +130,24 @@ namespace Test_FrameworkCore_Console.Migrations
                     b.HasKey("userId");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            userId = 1L,
+                            email = "hoangmaicuong99@gmail.com",
+                            firstName = "Cuong",
+                            lastName = "Hoang",
+                            pass = "123"
+                        },
+                        new
+                        {
+                            userId = 2L,
+                            email = "cuonghm@vihatgroup.com",
+                            firstName = "Cuong",
+                            lastName = "Hoang",
+                            pass = "123"
+                        });
                 });
 
             modelBuilder.Entity("Test_FrameworkCore_Console.Entities.UserDetail", b =>
@@ -97,12 +164,20 @@ namespace Test_FrameworkCore_Console.Migrations
                     b.HasKey("userDetailId");
 
                     b.ToTable("UserDetail");
+
+                    b.HasData(
+                        new
+                        {
+                            userDetailId = 1L,
+                            createDay = new DateTime(2022, 5, 8, 14, 40, 52, 531, DateTimeKind.Unspecified),
+                            updateDay = new DateTime(2022, 5, 8, 14, 40, 52, 531, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Test_FrameworkCore_Console.Entities.UserRole", b =>
                 {
-                    b.Property<long>("roleId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("roleId")
+                        .HasColumnType("int");
 
                     b.Property<long>("userId")
                         .HasColumnType("bigint");
@@ -112,6 +187,18 @@ namespace Test_FrameworkCore_Console.Migrations
                     b.HasIndex("userId");
 
                     b.ToTable("UserRole");
+
+                    b.HasData(
+                        new
+                        {
+                            roleId = 1,
+                            userId = 1L
+                        },
+                        new
+                        {
+                            roleId = 2,
+                            userId = 1L
+                        });
                 });
 
             modelBuilder.Entity("Test_FrameworkCore_Console.Entities.Product", b =>

@@ -14,6 +14,6 @@ namespace Test_FrameworkCore_Console.Entities
         [ForeignKey("roleId")]
         public Role Role { set; get; }
         public long userId { set; get; }
-        public long roleId { set; get; }
+        public int roleId { set; get; }
     }
 }
